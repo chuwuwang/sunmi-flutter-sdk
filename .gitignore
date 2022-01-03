@@ -86,3 +86,6 @@ lint/tmp/
 
 .idea/
 .dart_tool/
+
+.packages
+pubspec.lock
