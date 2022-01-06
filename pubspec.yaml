@@ -1,4 +1,4 @@
-name: sunmi_flutter_sdk
+name: sun_mi_flutter_sdk
 description: SUNMI hardware sdk for flutter.
 
 # The following line prevents the package from being accidentally published to
@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
