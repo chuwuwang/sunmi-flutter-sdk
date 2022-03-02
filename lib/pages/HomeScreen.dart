@@ -11,9 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('S U N M I Flutter Sdk'),
-        ),
+        appBar: AppBar(title: const Text('S U N M I Flutter Sdk'), ),
         body: _mainView(context),
       ),
     );
@@ -28,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             Row(
                 children:[
                   _tabItem('Basic', ColorHelper.basic, () { _gotoBasicPage(context); } ),
-                  _tabItem('Print', ColorHelper.print, () { _gotoBasicPage(context); } ),
+                  _tabItem('Print', ColorHelper.print, () {  } ),
                 ]
             ),
             Row(
@@ -45,9 +43,7 @@ class HomeScreen extends StatelessWidget {
 
   _gotoBasicPage(context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) =>
-        const BasicPage()
-      )
+      MaterialPageRoute(builder: (context) => const BasicPage(), )
     );
   }
 
@@ -57,17 +53,11 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           height: 112,
           margin: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                  Radius.circular(8)
-              )
-          ),
           child: MaterialButton(
-            onPressed: onPressed,
-            child: Text(text,
-                style: const TextStyle(color: Colors.white, fontSize: 18)
-            ),
             color: color,
+            onPressed: onPressed,
+            child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 18), ),
+            shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(8), ),
           ),
         )
     );
