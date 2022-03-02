@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sun_mi_flutter_sdk/plugins/TestChannel.dart';
 
 class GetSysParamScreen extends StatelessWidget {
 
@@ -13,7 +14,10 @@ class GetSysParamScreen extends StatelessWidget {
   }
 
   _mainView(BuildContext context) {
-
+    TestPlugin.getSystemParameters().then( (value) => {
+          print("value: $value")
+      }
+    );
   }
 
 }
