@@ -5,6 +5,10 @@ import android.os.Build
 
 object DeviceHelper {
 
+    fun getDeviceModel(): String {
+        return Build.MODEL
+    }
+
     @SuppressLint("MissingPermission")
     fun getSerialNumber(): String {
         return try {
