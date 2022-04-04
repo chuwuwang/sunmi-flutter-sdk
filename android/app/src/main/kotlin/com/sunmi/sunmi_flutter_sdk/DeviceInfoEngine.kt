@@ -9,7 +9,7 @@ class DeviceInfoEngine : FlutterPlugin {
 
     companion object {
         private const val TAG = "DeviceInfoEngine"
-        private const val deviceCode = "deviceCode"
+        private const val deviceCode = "DeviceCode"
         private const val deviceModel = "ro.product.model"
         private const val deviceBrand = "ro.product.brand"
         private var systemVersionName = "ro.version.sunMi_versionName".lowercase()
@@ -36,7 +36,7 @@ class DeviceInfoEngine : FlutterPlugin {
     }
 
     private fun getSystemParameters(call: MethodCall, result: MethodChannel.Result) {
-        var resultString: String ? = null
+        var resultString: String? = null
         when (call.arguments as String) {
             "deviceCode" -> resultString = getSysParam(deviceCode)
             "deviceModel" -> resultString = SystemPropertiesHelper.get(deviceModel)
@@ -49,6 +49,8 @@ class DeviceInfoEngine : FlutterPlugin {
             "firmwareVersion" -> resultString = getSysParam("FirmwareVersion")
             "hardwareVersion" -> resultString = getSysParam("HardwareVersion")
             "debugMode" -> resultString = getSysParam("DebugMode")
+            "reserved" -> resultString = getSysParam("Reserved")
+            "supportETC" -> resultString = getSysParam("SupportETC")
         }
         if (resultString == null) resultString = ""
         result.success(resultString)
