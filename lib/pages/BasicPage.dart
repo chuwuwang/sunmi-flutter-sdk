@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sun_mi_flutter_sdk/pages/basic/GetSysParamScreen.dart';
+import 'package:sun_mi_flutter_sdk/pages/basic/GetSystemParameterPage.dart';
+import 'package:sun_mi_flutter_sdk/pages/basic/ScreenExclusivePage.dart';
 import 'package:sun_mi_flutter_sdk/widget/WidgetHelper.dart';
 
 class BasicPage extends StatelessWidget {
@@ -17,17 +18,23 @@ class BasicPage extends StatelessWidget {
   _mainView(BuildContext context) {
     return Column(
       children: [
-        WidgetHelper.itemWidget("Get system parameters", () { _gotoGetSysParamScreen(context); } ),
+        WidgetHelper.itemWidget("Get system parameters", () { _gotoGetSystemParameterPage(context); } ),
         WidgetHelper.itemWidget("Buzzer", () { } ),
         WidgetHelper.itemWidget("LED lamp control", () { } ),
-        WidgetHelper.itemWidget("Set screen exclusive", () { } ),
+        WidgetHelper.itemWidget("Set screen exclusive", () {  _gotoScreenExclusivePage(context); } ),
       ],
     );
   }
 
-  _gotoGetSysParamScreen(context) {
+  _gotoGetSystemParameterPage(context) {
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const GetSysParamScreen(), )
+        MaterialPageRoute(builder: (context) => const GetSystemParameterPage(), )
+    );
+  }
+
+  _gotoScreenExclusivePage(context) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const ScreenExclusivePage(), )
     );
   }
 

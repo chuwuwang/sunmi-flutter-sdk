@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/plugins/DeviceInfoEngine.dart';
 
-class GetSysParamScreen extends StatelessWidget {
+class GetSystemParameterPage extends StatelessWidget {
 
-  const GetSysParamScreen( { Key ? key } ) : super(key: key);
+  const GetSystemParameterPage( { Key ? key } ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,79 +35,73 @@ class DeviceInfoState extends State<DeviceInfoWidget> {
   String _serialNumber = "";
   String _systemVersionName = "";
   String _systemVersionCode = "";
-  String _PN = "";
-  String _terminalUniqueSerialNumber = "";
+  String _debugMode = "";
+  String _pn = "";
+  String _tuSN = "";
   String _firmwareVersion = "";
   String _hardwareVersion = "";
-  String _debugMode = "";
   String _reserved = "";
   String _supportETC = "";
 
   @override
   void initState() {
     super.initState();
-    var list = [
-      "deviceCode",
-      "deviceModel",
-      "deviceBrand",
-      "serialNumber",
-      "systemVersionName",
-      "systemVersionCode",
-      "PN",
-      "terminalUniqueSerialNumber",
-      "firmwareVersion",
-      "hardwareVersion",
-      "debugMode",
-      "reserved",
-      "supportETC",
-    ];
-    for (var i = 0; i < list.length; i++) {
-      var key = list[i];
-      _getSystemParameters(key);
-    }
+    _getSystemParameters(DeviceInfoEngine.deviceCode);
+    _getSystemParameters(DeviceInfoEngine.deviceModel);
+    _getSystemParameters(DeviceInfoEngine.deviceBrand);
+    _getSystemParameters(DeviceInfoEngine.serialNumber);
+    _getSystemParameters(DeviceInfoEngine.systemVersionName);
+    _getSystemParameters(DeviceInfoEngine.systemVersionCode);
+    _getSystemParameters(DeviceInfoEngine.debugMode);
+    _getSystemParameters(DeviceInfoEngine.pn);
+    _getSystemParameters(DeviceInfoEngine.terminalUniqueSerialNumber);
+    _getSystemParameters(DeviceInfoEngine.firmwareVersion);
+    _getSystemParameters(DeviceInfoEngine.hardwareVersion);
+    _getSystemParameters(DeviceInfoEngine.reserved);
+    _getSystemParameters(DeviceInfoEngine.supportETC);
   }
 
   _getSystemParameters(String key) {
     DeviceInfoEngine.getSystemParameters(key).then( (value) => {
         setState( () {
-            switch(key) {
-              case "deviceCode":
+          switch (key) {
+              case DeviceInfoEngine.deviceCode:
                 _deviceCode = value;
                 break;
-              case "deviceModel":
+              case DeviceInfoEngine.deviceModel:
                 _deviceModel = value;
                 break;
-              case "deviceBrand":
+              case DeviceInfoEngine.deviceBrand:
                 _deviceBrand = value;
                 break;
-              case "serialNumber":
+              case DeviceInfoEngine.serialNumber:
                 _serialNumber = value;
                 break;
-              case "systemVersionName":
+              case DeviceInfoEngine.systemVersionName:
                 _systemVersionName = value;
                 break;
-              case "systemVersionCode":
+              case DeviceInfoEngine.systemVersionCode:
                 _systemVersionCode = value;
                 break;
-              case "PN":
-                _PN = value;
-                break;
-              case "terminalUniqueSerialNumber":
-                _terminalUniqueSerialNumber = value;
-                break;
-              case "firmwareVersion":
-                _firmwareVersion = value;
-                break;
-              case "hardwareVersion":
-                _hardwareVersion = value;
-                break;
-              case "debugMode":
+              case DeviceInfoEngine.debugMode:
                 _debugMode = value;
                 break;
-              case "reserved":
+              case DeviceInfoEngine.pn:
+                _pn = value;
+                break;
+              case DeviceInfoEngine.terminalUniqueSerialNumber:
+                _tuSN = value;
+                break;
+              case DeviceInfoEngine.firmwareVersion:
+                _firmwareVersion = value;
+                break;
+              case DeviceInfoEngine.hardwareVersion:
+                _hardwareVersion = value;
+                break;
+              case DeviceInfoEngine.reserved:
                 _reserved = value;
                 break;
-              case "supportETC":
+              case DeviceInfoEngine.supportETC:
                 _supportETC = value;
                 break;
             }
@@ -130,11 +124,11 @@ class DeviceInfoState extends State<DeviceInfoWidget> {
           _textWidget("Serial Number: $_serialNumber"),
           _textWidget("System Version Name: $_systemVersionName"),
           _textWidget("System Version Code: $_systemVersionCode"),
-          _textWidget("PN: $_PN"),
-          _textWidget("Terminal Unique Serial Number: $_terminalUniqueSerialNumber"),
+          _textWidget("DebugMode: $_debugMode"),
+          _textWidget("PN: $_pn"),
+          _textWidget("T U S N: $_tuSN"),
           _textWidget("Firmware Version: $_firmwareVersion"),
           _textWidget("Hardware Version: $_hardwareVersion"),
-          _textWidget("DebugMode: $_debugMode"),
           _textWidget("Support ETC: $_supportETC"),
           _textWidget("Reserved: $_reserved"),
         ],
