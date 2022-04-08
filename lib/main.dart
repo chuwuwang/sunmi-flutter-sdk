@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sun_mi_flutter_sdk/pages/HomeScreen.dart';
+import 'package:sun_mi_flutter_sdk/pages/HomePage.dart';
 
 void main() {
   if (Platform.isAndroid) {
@@ -11,7 +11,7 @@ void main() {
     );
   }
   var app = const MyApp();
-    runApp(app);
+  runApp(app);
 }
 
 class MyApp extends StatelessWidget {
@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen()
+        title: 'Flutter Demo',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const HomePage()
     );
   }
 

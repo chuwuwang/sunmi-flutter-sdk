@@ -3,9 +3,9 @@ import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 
 import 'BasicPage.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomePage extends StatelessWidget {
 
-  const HomeScreen( { Key ? key } ) : super(key: key);
+  const HomePage( { Key ? key } ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -140,7 +140,7 @@ class DeviceInfoState extends State<DeviceInfoWidget> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
       alignment: Alignment.centerLeft,
-      child: Text(text, style: const TextStyle(color: Colors.black, fontSize: 12), textAlign: TextAlign.start,),
+      child: Text(text, style: const TextStyle(color: Colors.black, fontSize: 12), textAlign: TextAlign.start, ),
     );
   }
 
