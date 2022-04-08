@@ -28,7 +28,8 @@ class DeviceInfoEngine : FlutterPlugin {
     }
 
     private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
-        Log.e("ktx", "onMethodCall call: $call")
+        val method = call.method
+        Log.e("ktx", "onMethodCall: $method")
         when (call.method) {
             "getSystemParameters" -> getSystemParameters(call, result)
             "enableScreenMonopoly" -> enableScreenMonopoly()

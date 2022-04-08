@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sun_mi_flutter_sdk/plugins/DeviceInfoEngine.dart';
 
 class ScreenExclusivePage extends StatelessWidget {
 
@@ -35,8 +36,8 @@ class ScreenExclusivePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      _tabItem('Enable', false, () {}),
-                      _tabItem('Disable', true, () {}),
+                      _tabItem('Enable', false, () { DeviceInfoEngine.enableScreenMonopoly(); } ),
+                      _tabItem('Disable', true, () { DeviceInfoEngine.disableScreenMonopoly(); } ),
                     ],
                   ),
                 ],
@@ -59,8 +60,8 @@ class ScreenExclusivePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      _tabItem('Enable', false, () {} ),
-                      _tabItem('Disable', true, () {} ),
+                      _tabItem('Enable', false, () { DeviceInfoEngine.enableStatusBarDropDown(); } ),
+                      _tabItem('Disable', true, () { DeviceInfoEngine.disableStatusBarDropDown(); } ),
                     ],
                   ),
                 ],
@@ -83,28 +84,28 @@ class ScreenExclusivePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      _tabItem('Show NavigationBar', false, () {} ),
-                      _tabItem('Hide NavigationBar', true, () {} ),
+                      _tabItem('Show NavigationBar', false, () { DeviceInfoEngine.showNavigationBar(); } ),
+                      _tabItem('Hide NavigationBar', true, () { DeviceInfoEngine.hideNavigationBar(); } ),
                     ],
                   ),
                   Row(
                     children: [
-                      _tabItem('Hide Back Key', false, () {} ),
-                      _tabItem('Hide Home Key', false, () {} ),
-                      _tabItem('Hide Recent Key', true, () {} ),
+                      _tabItem('Hide Back Key', false, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyBack); } ),
+                      _tabItem('Hide Home Key', false, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyHome); } ),
+                      _tabItem('Hide Recent Key', true, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyRecent); } ),
                     ],
                   ),
                   Row(
                     children: [
-                      _tabItem('Hide Back/Home Key', false, () {} ),
-                      _tabItem('Hide Back/Recent Key', false, () {} ),
-                      _tabItem('Hide Home/Recent Key', true, () {} ),
+                      _tabItem('Hide Back/Home Key', false, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyBack | DeviceInfoEngine.navigationBarItemKeyHome); } ),
+                      _tabItem('Hide Back/Recent Key', false, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyBack | DeviceInfoEngine.navigationBarItemKeyRecent); } ),
+                      _tabItem('Hide Home/Recent Key', true, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyHome | DeviceInfoEngine.navigationBarItemKeyRecent); } ),
                     ],
                   ),
                   Row(
                     children: [
-                      _tabItem('Show All Key', false, () {} ),
-                      _tabItem('Hide All Key', true, () {} ),
+                      _tabItem('Show All Key', false, () { DeviceInfoEngine.hideNavigationBarItemKey(0); } ),
+                      _tabItem('Hide All Key', true, () { DeviceInfoEngine.hideNavigationBarItemKey(DeviceInfoEngine.navigationBarItemKeyBack | DeviceInfoEngine.navigationBarItemKeyHome | DeviceInfoEngine.navigationBarItemKeyRecent); } ),
                     ],
                   ),
                 ],
