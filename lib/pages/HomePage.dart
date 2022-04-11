@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sun_mi_flutter_sdk/pages/print/PrintPage.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 
-import 'BasicPage.dart';
+import 'basic/BasicPage.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
             Row(
                 children:[
                   _tabItem('Basic', ColorHelper.basic, () { _gotoBasicPage(context); } ),
-                  _tabItem('Print', ColorHelper.print, () {  } ),
+                  _tabItem('Print', ColorHelper.print, () { _gtoPrintPage(context); } ),
                 ]
             ),
             Row(
@@ -44,6 +45,12 @@ class HomePage extends StatelessWidget {
   _gotoBasicPage(context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => const BasicPage(), )
+    );
+  }
+
+  _gtoPrintPage(context) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const PrintPage(), )
     );
   }
 

@@ -18,10 +18,10 @@ class BasicPage extends StatelessWidget {
   _mainView(BuildContext context) {
     return Column(
       children: [
-        WidgetHelper.itemWidget("Get system parameters", () { _gotoGetSystemParameterPage(context); } ),
-        WidgetHelper.itemWidget("Buzzer", () { } ),
-        WidgetHelper.itemWidget("LED lamp control", () { } ),
-        WidgetHelper.itemWidget("Set screen exclusive", () {  _gotoScreenExclusivePage(context); } ),
+        WidgetHelper.itemWidget("Get system parameters", true, () { _gotoGetSystemParameterPage(context); } ),
+        WidgetHelper.itemWidget("Buzzer", true, () { } ),
+        WidgetHelper.itemWidget("LED lamp control", true, () { } ),
+        WidgetHelper.itemWidget("Set screen exclusive", true, () {  _gotoScreenExclusivePage(context); } ),
       ],
     );
   }

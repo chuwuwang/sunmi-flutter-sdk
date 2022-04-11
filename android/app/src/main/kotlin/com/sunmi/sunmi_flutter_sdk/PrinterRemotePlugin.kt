@@ -21,7 +21,7 @@ class PrinterRemotePlugin : FlutterPlugin {
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
-        val methodChannel = MethodChannel(binding.binaryMessenger, "printer-plugin")
+        val methodChannel = MethodChannel(binding.binaryMessenger, "printer-engine")
         methodChannel.setMethodCallHandler(methodCallHandler)
     }
 
@@ -53,7 +53,9 @@ class PrinterRemotePlugin : FlutterPlugin {
 
     private fun initPrinter() {
         try {
-            InnerPrinterManager.getInstance().bindService(context, serviceConnection)
+            if (printerService == null) {
+                InnerPrinterManager.getInstance().bindService(context, serviceConnection)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class WidgetHelper {
 
-  static itemWidget(String text, VoidCallback onPressed) {
+  static itemWidget(String text, bool rightIcon, VoidCallback onPressed) {
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed,
@@ -14,7 +14,7 @@ class WidgetHelper {
             child: Row(
               children: [
                 Expanded(child: Text(text, style: const TextStyle(color: Colors.black, fontSize: 16), ), ),
-                const Icon(Icons.arrow_forward_ios, size: 20, color: Colors.black54),
+                if (rightIcon) const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
               ],
             ),
           ),

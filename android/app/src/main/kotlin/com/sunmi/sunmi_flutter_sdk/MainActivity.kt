@@ -9,7 +9,7 @@ import sunmi.paylib.SunmiPayKernel
 class MainActivity : FlutterActivity() {
 
     companion object {
-         const val TAG = "MainActivity"
+         const val TAG = "sun-mi-flutter"
         var basicOptV2: BasicOptV2 ? = null
     }
 
