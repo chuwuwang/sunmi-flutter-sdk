@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/print/PrintPage.dart';
+import 'package:sun_mi_flutter_sdk/pages/scan/ScanPage.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 
 import 'basic/BasicPage.dart';
@@ -32,8 +33,8 @@ class HomePage extends StatelessWidget {
             ),
             Row(
                 children:[
-                  _tabItem('Scan', ColorHelper.security, () {}),
-                  _tabItem('Emv', ColorHelper.emv, () {}),
+                  _tabItem('Scan', ColorHelper.security, () { _gotoScanPage(context); } ),
+                  _tabItem('Emv', ColorHelper.emv, () { } ),
                 ]
             )
           ],
@@ -51,6 +52,12 @@ class HomePage extends StatelessWidget {
   _gtoPrintPage(context) {
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const PrintPage(), )
+    );
+  }
+
+  _gotoScanPage(context) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const ScanPage(), )
     );
   }
 

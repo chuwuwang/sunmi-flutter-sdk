@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/plugins/DeviceInfoEngine.dart';
 
