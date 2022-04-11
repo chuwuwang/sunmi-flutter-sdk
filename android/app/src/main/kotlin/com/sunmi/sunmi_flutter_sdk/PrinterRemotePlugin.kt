@@ -260,14 +260,26 @@ class PrinterRemotePlugin : FlutterPlugin {
         try {
             val printer = printerService
             if (printer != null) {
-                val list = methodCall.argument<List<String>>("columnText")
-                if (list != null) {
-                    val columnText = arrayOfNulls<String>(list.size)
-                    for (i in list.indices) {
-                        columnText[i] = list[i]
+                val textList = methodCall.argument< List<String> >("columnText")
+                val widthList = methodCall.argument< List<Int> >("columnWidth")
+                val alignList = methodCall.argument< List<Int> >("columnAlign")
+                if (textList != null) {
+                    val columnText = arrayOfNulls<String>(textList.size)
+                    for (i in textList.indices) {
+                        columnText[i] = textList[i]
                     }
-                    val columnWidth = methodCall.argument<IntArray>("columnWidth") ?: intArrayOf(1, 1, 1)
-                    val columnAlign = methodCall.argument<IntArray>("columnAlign") ?: intArrayOf(1, 1, 1)
+                    val columnWidth = intArrayOf(1, 1, 1)
+                    if (widthList != null) {
+                        for (i in widthList.indices) {
+                            columnWidth[i] = widthList[i]
+                        }
+                    }
+                    val columnAlign = intArrayOf(0, 0, 0)
+                    if (alignList != null) {
+                        for (i in alignList.indices) {
+                            columnAlign[i] = alignList[i]
+                        }
+                    }
                     printer.printColumnsString(columnText, columnWidth, columnAlign, resultCallback)
                 }
             } else {
@@ -327,6 +339,15 @@ class PrinterRemotePlugin : FlutterPlugin {
 
         override fun onRunResult(isSuccess: Boolean) {
             Log.e(MainActivity.TAG, "onRunResult: $isSuccess")
+            try {
+                if (isSuccess) {
+                    returnSuccess("Command executed successfully")
+                } else {
+                    returnError("-202", "Command executed failed")
+                }
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
         }
 
         override fun onReturnString(msg: String ? ) {
