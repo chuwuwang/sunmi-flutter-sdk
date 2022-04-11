@@ -66,4 +66,6 @@ flutter {
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.sunmi:printerlibrary:1.0.14'
 }

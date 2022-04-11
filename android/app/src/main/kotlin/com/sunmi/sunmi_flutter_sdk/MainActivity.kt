@@ -9,16 +9,17 @@ import sunmi.paylib.SunmiPayKernel
 class MainActivity : FlutterActivity() {
 
     companion object {
+         const val TAG = "MainActivity"
         var basicOptV2: BasicOptV2 ? = null
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        val testRemotePlugin = TestRemotePlugin()
         val deviceInfoEngine = DeviceInfoEngine()
-        flutterEngine.plugins.add(testRemotePlugin)
+        val printerRemotePlugin = PrinterRemotePlugin()
         flutterEngine.plugins.add(deviceInfoEngine)
+        flutterEngine.plugins.add(printerRemotePlugin)
 
         GeneratedPluginRegistrant.registerWith(flutterEngine)
 

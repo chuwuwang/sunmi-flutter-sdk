@@ -119,7 +119,6 @@ class DeviceInfoEngine : FlutterPlugin {
                 basicOpt.setScreenMode(key)
             } else {
                 Log.e(TAG, "basicOptV2 is null")
-                null
             }
         } catch (e: Throwable) {
             e.printStackTrace()
