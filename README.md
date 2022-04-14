@@ -173,7 +173,7 @@ start scan.
 - Return
     - Map, including value and type data of string type.
 
-### Devices Mudule
+## Devices Mudule
 
 ### 1. getSystemParameters()
 Get information about the device.
