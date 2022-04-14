@@ -8,8 +8,8 @@ Initialize the sunmi printer.
 - Parameter
     - None
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 2. getPrinterStatus()
 Get printer status.
@@ -34,24 +34,24 @@ Reset the printer logic program (for example: layout, bold and other style setti
 - Parameter
     - None
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 4. setBold()
 Set the font bold, the default is false.
 - Parameter
     - bool, true: set fond bold, false: cancel font bold.
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 5. setFontSize()
 Set font size.
 - Parameter
     - int, font size.
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 6. setAlignment()
 Set alignment mode.
@@ -61,32 +61,32 @@ Set alignment mode.
         - 1 - center
         - 2 - right
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 7. setRowHeight()
 Set the line spacing for print.
 - Parameter
     - int, row height.
 - Return
-    - success(): a string message field.
-    - error(): string code field and message field.
+    - success: a string message field.
+    - error: string code field and message field.
 
 ### 8. printText()
 Print text.
 - Parameter
     - String, print data.
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 ### 9. printImage()
 Print picture.
 - Parameter
     - Uint8List, the byte array of the picture.
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 **Note: Because SUNMI's V series and P series use 58mm printers. If you want the printed image to be centered, please make an image with a width of 384px.**
 
@@ -112,8 +112,8 @@ Print barcode.
         - 2 - The text is under the barcode
         - 3 - Barcodes are printed up and down
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 ### 11. printQRCode()
 Print QRCode.
@@ -126,8 +126,8 @@ Print QRCode.
         - 2 - Error correction level Q
         - 3 - Error correction level H
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 ### 12. printTable()
 Print Table.
@@ -136,16 +136,16 @@ Print Table.
     - List\<int>, array of column widths, calculated in English characters, each middle character occupies two English characters, and each width is greater than 0.
     - List\<int>, alignment of each column: 0 on the left, 1 on the center, and 2 on the right.
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 ### 13. printLine()
 Print blank lines.
 - Parameter
     - int, number of print lines.
 - Return
-    - success(): a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
-    - error(): string code field and message field.
+    - success: a string message field. The processing result returned by success() method refers to the execution result of the command processing, not the processing result of printing out the paper.
+    - error: string code field and message field.
 
 ### 14. enterPrinterBuffer()
 Start transaction print.
@@ -161,9 +161,80 @@ Exit and commit the transaction to print.
 - Parameter
     - None
 - Return
-    - success(): a string message field, means print success.
-    - error(): string code field and message field, means print failure.
+    - success: a string message field, means print success.
+    - error: string code field and message field, means print failure.
 
+## Scan Module
+
+### 1. startScan()
+start scan.
+- Parameter
+    - None
+- Return
+    - Map, including value and type data of string type.
+
+### Devices Mudule
+
+### 1. getSystemParameters()
+Get information about the device.
+- Parameter
+    - String, device related parameter name
+        - deviceCode
+        - deviceModel
+        - deviceBrand
+        - serialNumber
+        - systemVersionName
+        - systemVersionCode
+        - debugMode
+        - PN
+        - terminalUniqueSerialNumber
+        - firmwareVersion
+        - hardwareVersion
+        - reserved
+- Return
+    - String, value corresponding to the parameter.
+
+### 2. enableScreenMonopoly()
+Enable screen monopoly mean screen exclusive, power key disabled, volume key disabled, system status bar disabled and system navigation bar disabled. 
+- Parameter
+    - None
+- Return    
+    - None
+
+### 3. disableScreenMonopoly()
+Cancel screen monopoly.
+- Parameter
+    - None
+- Return    
+    - None
+
+### 4. enableStatusBarDropDown()
+Allow status bar drop down.
+- Parameter
+    - None
+- Return    
+    - None    
+
+### 5. disableStatusBarDropDown()
+Disable status bar drop down.
+- Parameter
+    - None
+- Return    
+    - None
+
+### 6. showNavigationBar()
+Show navigation bar.
+- Parameter
+    - None
+- Return    
+    - None
+
+### 7. hideNavigationBar()
+Hide navigation bar.
+- Parameter
+    - None
+- Return    
+    - None
 
 ## Remark
 This Demo is only suitable for SUNMI P series and V series products, not suitable for other products. If you have other requirements, please contact me.
