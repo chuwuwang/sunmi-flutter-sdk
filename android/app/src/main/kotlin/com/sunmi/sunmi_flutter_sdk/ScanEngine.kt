@@ -19,13 +19,16 @@ class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+
     }
 
     private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
-        methodResult = result
-        when (call.method) {
-            "startScan" -> startScan()
-            else -> result.notImplemented()
+        val method = call.method
+        if (method == "startScan") {
+            methodResult = result
+            startScan()
+        } else {
+            result.notImplemented()
         }
     }
 
@@ -41,22 +44,22 @@ class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
         if (intent.resolveActivity(context.packageManager) != null) {
             activity.startActivityForResult(intent, 100)
         } else {
+            methodResult = null
             Toast.makeText(context, "Can't open scanner", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun returnScanResult(type: String ? = null, value: String ? = null) {
-        val result = methodResult
-        if (result != null) {
-            if (value != null) {
-                val map = HashMap<String, String ? >()
-                map["type"] = type
-                map["value"] = value
-                result.success(map)
-            } else {
-                result.error("-100", "Scan failed", "Scan failed")
-            }
+        val result = methodResult ?: return
+        if (value != null) {
+            val map = HashMap<String, String ? >()
+            map["type"] = type
+            map["value"] = value
+            result.success(map)
+        } else {
+            result.error("-100", "Scan failed", "Scan failed")
         }
+        methodResult = null
     }
 
 }

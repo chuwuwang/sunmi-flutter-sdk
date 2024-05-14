@@ -10,8 +10,8 @@ class ScanEngine {
       return await _channel.invokeMethod("startScan");
     } on PlatformException catch (e) {
       print(e);
-      return {};
     }
+    return {};
   }
 
 }
