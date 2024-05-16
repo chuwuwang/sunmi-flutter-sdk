@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/BasicPage.dart';
 import 'package:sun_mi_flutter_sdk/pages/print/print_page.dart';
-import 'package:sun_mi_flutter_sdk/pages/scan/ScanPage.dart';
+import 'package:sun_mi_flutter_sdk/pages/scanner/scanner_page.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,13 +18,18 @@ class HomePage extends StatelessWidget {
   }
 
   _mainView(BuildContext context) {
+    emptyAction() => {};
+    gtoPrintPageAction() => _gtoPrintPage(context);
+    gotoBasicPageAction() => _gotoBasicPage(context);
+    gotoScannerPageAction() => _gotoScannerPage(context);
+
     List<Widget> children1st = [
-      _tabItem('Basic', ColorHelper.basic, () { _gotoBasicPage(context); } ),
-      _tabItem('Print', ColorHelper.print, () { _gtoPrintPage(context); } ),
+      _tabItem('Basic', ColorHelper.basic, gotoBasicPageAction),
+      _tabItem('Print', ColorHelper.print, gtoPrintPageAction),
     ];
     List<Widget> children2nd = [
-      _tabItem('Scan', ColorHelper.scan, () { _gotoScanPage(context); } ),
-      _tabItem('Emv', ColorHelper.emv, () { _gtoPrintPage(context); } ),
+      _tabItem('Scanner', ColorHelper.scan, gotoScannerPageAction),
+      _tabItem('Emv', ColorHelper.emv, emptyAction),
     ];
     var row1st = Row(children: children1st);
     var row2nd = Row(children: children2nd);
@@ -46,8 +51,8 @@ class HomePage extends StatelessWidget {
     Navigator.of(context).push(route);
   }
 
-  _gotoScanPage(context) {
-    builder(context) => const ScanPage();
+  _gotoScannerPage(context) {
+    builder(context) => const ScannerPage();
     var route = MaterialPageRoute(builder: builder);
     Navigator.of(context).push(route);
   }

@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/engine/plugins/scanner_engine.dart';
+import 'package:sun_mi_flutter_sdk/pages/base_state.dart';
+import 'package:sun_mi_flutter_sdk/pages/base_stateful_widget.dart';
+import 'package:sun_mi_flutter_sdk/pages/base_stateless_widget.dart';
 
-class ScanPage extends StatelessWidget {
+class ScannerPage extends BaseStatelessWidget {
 
-  const ScanPage( { Key ? key } ) : super(key: key);
+  const ScannerPage( { Key ? key } ) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var text = const Text("Scan");
-    var appBar = AppBar(title: text);
-    var body = const ScanWidget();
-    return Scaffold(appBar: appBar, body: body);
-  }
+  String getTitleString() => "Scanner";
+
+  @override
+  Widget onCreateChild(BuildContext context) => const _ScannerWidget();
 
 }
 
-class ScanWidget extends StatefulWidget {
+class _ScannerWidget extends BaseStatefulWidget {
 
-  const ScanWidget( { Key ? key } ) : super(key: key);
+  const _ScannerWidget( { Key ? key } ) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ScanState();
+  State<StatefulWidget> createState() => _ScannerState();
 
 }
 
-class ScanState extends State<ScanWidget> {
+class _ScannerState extends BaseState<_ScannerWidget> {
 
   String _type = "";
   String _value = "";
 
   @override
   Widget build(BuildContext context) {
-    startScanAction() {
-      _startScan();
-    }
+    startScanAction() => _startScan();
     var textStyle = const TextStyle(color: Colors.white, fontSize: 14);
     var text = Text("Start Scan", style: textStyle);
     var button = MaterialButton(onPressed: startScanAction, color: Colors.blueAccent, child: text);
@@ -50,9 +49,7 @@ class ScanState extends State<ScanWidget> {
 
   _startScan() {
     Map value = {};
-    callback() {
-      _update(value);
-    }
+    callback() => _update(value);
     onSuccess(map) {
       value = map;
       setState(callback);

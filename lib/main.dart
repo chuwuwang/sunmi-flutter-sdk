@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sun_mi_flutter_sdk/pages/HomePage.dart';
+import 'package:sun_mi_flutter_sdk/pages/home_page.dart';
 
 void main() {
   if (Platform.isAndroid) {
