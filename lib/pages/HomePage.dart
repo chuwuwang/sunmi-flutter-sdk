@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/BasicPage.dart';
-import 'package:sun_mi_flutter_sdk/pages/print/PrintPage.dart';
+import 'package:sun_mi_flutter_sdk/pages/print/print_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/scan/ScanPage.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 

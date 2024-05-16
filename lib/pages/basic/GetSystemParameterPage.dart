@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sun_mi_flutter_sdk/plugins/DeviceInfoEngine.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/DeviceInfoEngine.dart';
 
 class GetSystemParameterPage extends StatelessWidget {
 

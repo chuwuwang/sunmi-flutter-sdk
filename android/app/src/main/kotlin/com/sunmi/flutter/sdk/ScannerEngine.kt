@@ -1,12 +1,14 @@
-package com.sunmi.sunmi_flutter_sdk
+package com.sunmi.flutter.sdk
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
 
-class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
+class ScannerEngine(private val activity: Activity) : FlutterPlugin {
 
     private lateinit var context: Context
 
@@ -14,7 +16,7 @@ class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
-        val methodChannel = MethodChannel(binding.binaryMessenger, "scan-engine")
+        val methodChannel = MethodChannel(binding.binaryMessenger, "scanner-engine")
         methodChannel.setMethodCallHandler(methodCallHandler)
     }
 
@@ -34,8 +36,8 @@ class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
 
     private fun startScan() {
         val intent = Intent()
-        intent.action = "com.summi.scan"
-        intent.setPackage("com.sunmi.sunmiqrcodescanner")
+        intent.action = "com.sum" + "mi.scan"
+        intent.setPackage("com.sunmi.sun" + "mi" + "qr" + "code" + "scanner")
         intent.putExtra("IS_SHOW_SETTING", false)       // whether to display the setting button, default true
         intent.putExtra("IDENTIFY_MORE_CODE", true)     // identify multiple qr code in the screen
         intent.putExtra("IS_AZTEC_ENABLE", true)        // allow read of AZTEC code
@@ -49,16 +51,28 @@ class ScanEngine(private val activity: MainActivity) : FlutterPlugin {
         }
     }
 
-    fun returnScanResult(type: String ? = null, value: String ? = null) {
-        val result = methodResult ?: return
-        if (value != null) {
-            val map = HashMap<String, String ? >()
-            map["type"] = type
-            map["value"] = value
-            result.success(map)
-        } else {
-            result.error("-100", "Scan failed", "Scan failed")
+    fun onActivityForResult(requestCode: Int, resultCode: Int, data: Intent ? ) {
+        if (data == null || requestCode != 100) return
+        val bundle = data.extras ?: return
+        val obj = bundle.getSerializable("data")
+        if (obj != null && obj is ArrayList<*>) {
+            val result = obj as ArrayList< HashMap<String, String> >
+            if (result != null && result.size > 0) {
+                val type = result[0]["TYPE"] ?: ""
+                val value = result[0]["VALUE"] ?: ""
+                Log.e(Constant.TAG, "type: $type")
+                Log.e(Constant.TAG, "value: $value")
+                returnScanResult(type, value)
+            }
         }
+    }
+
+    private fun returnScanResult(type: String, value: String) {
+        val result = methodResult ?: return
+        val map = HashMap<String, String>()
+        map["type"] = type
+        map["value"] = value
+        result.success(map)
         methodResult = null
     }
 

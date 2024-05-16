@@ -16,7 +16,7 @@ class PrinterEngine {
     return await _channel.invokeMethod("reset");
   }
 
-  static Future<String> setBold(bool isBold) async {
+  static Future<String> setFontBold(bool isBold) async {
     return await _channel.invokeMethod("setFontBold", isBold);
   }
 
@@ -24,11 +24,11 @@ class PrinterEngine {
     return await _channel.invokeMethod("setFontSize", fontSize);
   }
 
-  static Future<String> setAlignment(int alignment) async {
+  static Future<String> setFontAlignment(int alignment) async {
     return await _channel.invokeMethod("setFontAlignment", alignment);
   }
 
-  static Future<String> setRowHeight(int rowHeight) async {
+  static Future<String> setFontRowHeight(int rowHeight) async {
     return await _channel.invokeMethod("setFontRowHeight", rowHeight);
   }
 

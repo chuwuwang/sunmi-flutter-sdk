@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sun_mi_flutter_sdk/plugins/ScanEngine.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/scanner_engine.dart';
 
 class ScanPage extends StatelessWidget {
 
