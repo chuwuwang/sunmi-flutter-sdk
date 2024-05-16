@@ -1,4 +1,4 @@
-package com.sunmi.sunmi_flutter_sdk
+package com.sunmi.flutter.sdk
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -16,6 +16,7 @@ class PrinterRemotePlugin : FlutterPlugin {
     private lateinit var context: Context
     private var printerService: SunmiPrinterService ? = null
 
+    private var isPrinterBuffer = false
     private lateinit var methodCall: MethodCall
     private var methodResult: MethodChannel.Result ? = null
 
@@ -26,32 +27,55 @@ class PrinterRemotePlugin : FlutterPlugin {
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+
     }
 
     private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
         methodCall = call
         methodResult = result
-        when (call.method) {
-            "initPrinter" -> initPrinter()
-            "getPrinterStatus" -> getPrinterStatus()
-            "reset" -> reset()
-            "setBold" -> setBold()
-            "setFontSize" -> setFontSize()
-            "setAlignment" -> setAlignment()
-            "setRowHeight" -> setRowHeight()
-            "printText" -> printText()
-            "printImage" -> printImage()
-            "printBarcode" -> printBarcode()
-            "printQRCode" -> printQRCode()
-            "printTable" -> printTable()
-            "printLine" -> printLine()
-            "enterPrinterBuffer" -> enterPrinterBuffer()
-            "exitPrinterBuffer" -> exitPrinterBuffer()
-            else -> result.notImplemented()
+        if (call.method == "initPrinter") {
+            initPrinter()
+        } else if (call.method == "getPrinterStatus") {
+            getPrinterStatus()
+        } else if (call.method == "reset") {
+            reset()
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        else if (call.method == "setFontBold") {
+            setFontBold()
+        } else if (call.method == "setFontSize") {
+            setFontSize()
+        } else if (call.method == "setFontAlignment") {
+            setFontAlignment()
+        } else if (call.method == "setFontRowHeight") {
+            setFontRowHeight()
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        else if (call.method == "printText") {
+            printText()
+        } else if (call.method == "printImage") {
+            printImage()
+        } else if (call.method == "printBarcode") {
+            printBarcode()
+        } else if (call.method == "printQRCode") {
+            printQRCode()
+        } else if (call.method == "printTable") {
+            printTable()
+        } else if (call.method == "printLine") {
+            printLine()
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        else if (call.method == "enterPrinterBuffer") {
+            enterPrinterBuffer()
+        } else if (call.method == "exitPrinterBuffer") {
+            exitPrinterBuffer()
+        } else {
+            result.notImplemented()
         }
     }
 
     private fun initPrinter() {
+        isPrinterBuffer = false
         try {
             if (printerService == null) {
                 InnerPrinterManager.getInstance().bindService(context, serviceConnection)
@@ -64,17 +88,22 @@ class PrinterRemotePlugin : FlutterPlugin {
     private val serviceConnection = object : InnerPrinterCallback() {
 
         override fun onConnected(sunmiPrinterService: SunmiPrinterService ? ) {
-            Log.e(MainActivity.TAG, "onConnected")
+            Log.e(Constant.TAG, "onConnected")
+            isPrinterBuffer = false
             printerService = sunmiPrinterService
             returnSuccess("Connected printer successful")
         }
 
         override fun onDisconnected() {
-            Log.e(MainActivity.TAG, "onDisconnected")
+            Log.e(Constant.TAG, "onDisconnected")
+            isPrinterBuffer = false
             returnError("-100", "Connected printer failed")
         }
 
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun getPrinterStatus() {
         var state = -1
@@ -83,7 +112,7 @@ class PrinterRemotePlugin : FlutterPlugin {
             if (printer != null) {
                 state = printer.updatePrinterState()
             } else {
-                Log.e(MainActivity.TAG, "printerService si null")
+                Log.e(Constant.TAG, "printerService si null")
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -105,7 +134,7 @@ class PrinterRemotePlugin : FlutterPlugin {
         }
     }
 
-    private fun setBold() {
+    private fun setFontBold() {
         try {
             val printer = printerService
             if (printer != null) {
@@ -147,7 +176,7 @@ class PrinterRemotePlugin : FlutterPlugin {
         }
     }
 
-    private fun setAlignment() {
+    private fun setFontAlignment() {
         try {
             val printer = printerService
             if (printer != null) {
@@ -164,7 +193,7 @@ class PrinterRemotePlugin : FlutterPlugin {
         }
     }
 
-    private fun setRowHeight() {
+    private fun setFontRowHeight() {
         try {
             val printer = printerService
             if (printer != null) {
@@ -184,6 +213,9 @@ class PrinterRemotePlugin : FlutterPlugin {
             returnErrorByException()
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun printText() {
         try {
@@ -224,10 +256,10 @@ class PrinterRemotePlugin : FlutterPlugin {
         try {
             val printer = printerService
             if (printer != null) {
-                val data = methodCall.argument<String>("data") ?: ""
-                val symbology = methodCall.argument<Int>("symbology") ?: 8
-                val height = methodCall.argument<Int>("height") ?: 162
                 val width = methodCall.argument<Int>("width") ?: 2
+                val data = methodCall.argument<String>("data") ?: ""
+                val height = methodCall.argument<Int>("height") ?: 162
+                val symbology = methodCall.argument<Int>("symbology") ?: 8
                 val textPosition = methodCall.argument<Int>("textPosition") ?: 2
                 printer.printBarCode(data, symbology, height, width, textPosition, resultCallback)
             } else {
@@ -260,9 +292,9 @@ class PrinterRemotePlugin : FlutterPlugin {
         try {
             val printer = printerService
             if (printer != null) {
-                val textList = methodCall.argument< List<String> >("columnText")
                 val widthList = methodCall.argument< List<Int> >("columnWidth")
                 val alignList = methodCall.argument< List<Int> >("columnAlign")
+                val textList = methodCall.argument< List<String> >("columnText")
                 if (textList != null) {
                     val columnText = arrayOfNulls<String>(textList.size)
                     for (i in textList.indices) {
@@ -309,12 +341,13 @@ class PrinterRemotePlugin : FlutterPlugin {
     }
 
     private fun enterPrinterBuffer() {
+        isPrinterBuffer = true
         try {
             val printer = printerService
             if (printer != null) {
                 printer.enterPrinterBuffer(true)
             } else {
-                Log.e(MainActivity.TAG, "printerService is null")
+                Log.e(Constant.TAG, "printerService is null")
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -338,7 +371,8 @@ class PrinterRemotePlugin : FlutterPlugin {
     private val resultCallback = object : InnerResultCallback() {
 
         override fun onRunResult(isSuccess: Boolean) {
-            Log.e(MainActivity.TAG, "onRunResult: $isSuccess")
+            Log.e(Constant.TAG, "onRunResult: $isSuccess")
+            if (isPrinterBuffer) return
             try {
                 if (isSuccess) {
                     returnSuccess("Command executed successfully")
@@ -351,15 +385,15 @@ class PrinterRemotePlugin : FlutterPlugin {
         }
 
         override fun onReturnString(msg: String ? ) {
-            Log.e(MainActivity.TAG, "onReturnString: $msg")
+            Log.e(Constant.TAG, "onReturnString: $msg")
         }
 
         override fun onRaiseException(code: Int, msg: String ? ) {
-            Log.e(MainActivity.TAG, "onRaiseException: $code $msg")
+            Log.e(Constant.TAG, "onRaiseException: $code $msg")
         }
 
         override fun onPrintResult(code: Int, msg: String ? ) {
-            Log.e(MainActivity.TAG, "onPrintResult: $code $msg")
+            Log.e(Constant.TAG, "onPrintResult: $code $msg")
             try {
                 if (code == 0) {
                     returnSuccess("Print successfully")
@@ -369,6 +403,7 @@ class PrinterRemotePlugin : FlutterPlugin {
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
+            isPrinterBuffer = false
         }
 
     }
@@ -378,8 +413,9 @@ class PrinterRemotePlugin : FlutterPlugin {
         if (result != null) {
             result.success(any)
         } else {
-            Log.e(MainActivity.TAG, "result is null")
+            Log.e(Constant.TAG, "result is null")
         }
+        methodResult = null
     }
 
     private fun returnErrorByNull() {
@@ -395,8 +431,9 @@ class PrinterRemotePlugin : FlutterPlugin {
         if (result != null) {
             result.error(code, message, "printer error")
         } else {
-            Log.e(MainActivity.TAG, "result is null")
+            Log.e(Constant.TAG, "result is null")
         }
+        methodResult = null
     }
 
 }

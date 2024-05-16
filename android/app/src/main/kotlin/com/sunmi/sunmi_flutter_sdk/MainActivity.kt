@@ -2,6 +2,7 @@ package com.sunmi.sunmi_flutter_sdk
 
 import android.content.Intent
 import android.util.Log
+import com.sunmi.flutter.sdk.PrinterRemotePlugin
 import com.sunmi.pay.hardware.aidlv2.system.BasicOptV2
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
