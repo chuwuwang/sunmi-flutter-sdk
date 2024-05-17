@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 import 'package:flutter/services.dart';
 
 class DeviceInfoEngine {
@@ -24,68 +23,35 @@ class DeviceInfoEngine {
   static const int navigationBarItemKeyRecent = 16777216;
 
   static Future<String> getSystemParameters(String parameter) async {
-    try {
-      return await _channel.invokeMethod("getSystemParameters", parameter);
-    } on Exception catch (e) {
-      print(e);
-      return "";
-    }
+    return await _channel.invokeMethod("getSystemParameters", parameter);
   }
 
   static enableScreenMonopoly() async {
-    try {
-      await _channel.invokeMethod("enableScreenMonopoly");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("enableScreenMonopoly");
   }
 
   static disableScreenMonopoly() async {
-    try {
-      await _channel.invokeMethod("disableScreenMonopoly");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("disableScreenMonopoly");
   }
 
   static enableStatusBarDropDown() async {
-    try {
-      await _channel.invokeMethod("enableStatusBarDropDown");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("enableStatusBarDropDown");
   }
 
   static disableStatusBarDropDown() async {
-    try {
-      await _channel.invokeMethod("disableStatusBarDropDown");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("disableStatusBarDropDown");
   }
 
   static showNavigationBar() async {
-    try {
-      await _channel.invokeMethod("showNavigationBar");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("showNavigationBar");
   }
 
   static hideNavigationBar() async {
-    try {
-      await _channel.invokeMethod("hideNavigationBar");
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("hideNavigationBar");
   }
 
   static hideNavigationBarItemKey(int key) async {
-    try {
-      await _channel.invokeMethod("hideNavigationBarItemKey", key);
-    } on Exception catch (e) {
-      print(e);
-    }
+    await _channel.invokeMethod("hideNavigationBarItemKey", key);
   }
 
 }

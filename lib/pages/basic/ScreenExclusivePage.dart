@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sun_mi_flutter_sdk/engine/plugins/DeviceInfoEngine.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/device_info_engine.dart';
 
 class ScreenExclusivePage extends StatelessWidget {
 

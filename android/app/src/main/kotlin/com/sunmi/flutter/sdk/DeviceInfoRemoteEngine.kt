@@ -1,12 +1,13 @@
-package com.sunmi.sunmi_flutter_sdk
+package com.sunmi.flutter.sdk
 
 import android.util.Log
 import com.sunmi.pay.hardware.aidl.AidlConstants
+import com.sunmi.sunmi_flutter_sdk.MainActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-class DeviceInfoEngine : FlutterPlugin {
+class DeviceInfoRemoteEngine : FlutterPlugin {
 
     companion object {
         private const val TAG = "DeviceInfoEngine"
@@ -28,37 +29,30 @@ class DeviceInfoEngine : FlutterPlugin {
     }
 
     private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
-        when (call.method) {
-            "getSystemParameters" -> getSystemParameters(call, result)
-            "enableScreenMonopoly" -> enableScreenMonopoly()
-            "disableScreenMonopoly" -> disableScreenMonopoly()
-            "enableStatusBarDropDown" -> enableStatusBarDropDown()
-            "disableStatusBarDropDown" -> disableStatusBarDropDown()
-            "hideNavigationBar" -> hideNavigationBar()
-            "showNavigationBar" -> showNavigationBar()
-            "hideNavigationBarItemKey" -> hideNavigationBarItemKey(call)
-            else -> result.notImplemented()
+        val method = call.method
+        if (method == "getSystemParameters") {
+            getSystemParameters(call, result)
         }
+
+
+//        when (call.method) {
+//            "getSystemParameters" -> getSystemParameters(call, result)
+//            "enableScreenMonopoly" -> enableScreenMonopoly()
+//            "disableScreenMonopoly" -> disableScreenMonopoly()
+//            "enableStatusBarDropDown" -> enableStatusBarDropDown()
+//            "disableStatusBarDropDown" -> disableStatusBarDropDown()
+//            "hideNavigationBar" -> hideNavigationBar()
+//            "showNavigationBar" -> showNavigationBar()
+//            "hideNavigationBarItemKey" -> hideNavigationBarItemKey(call)
+//            else -> result.notImplemented()
+//        }
     }
 
     private fun getSystemParameters(call: MethodCall, result: MethodChannel.Result) {
         var resultString: String ? = null
-        if (call.arguments is String) {
-            when (call.arguments as String) {
-                "deviceCode" -> resultString = getSysParam(deviceCode)
-                "deviceModel" -> resultString = SystemPropertiesHelper.get(deviceModel)
-                "deviceBrand" -> resultString = SystemPropertiesHelper.get(deviceBrand)
-                "serialNumber" -> resultString = DeviceHelper.getSerialNumber()
-                "systemVersionName" -> resultString = SystemPropertiesHelper.get(systemVersionName)
-                "systemVersionCode" -> resultString = SystemPropertiesHelper.get(systemVersionCode)
-                "PN" -> resultString = getSysParam("PN")
-                "terminalUniqueSerialNumber" -> resultString = getSysParam(terminalUniqueSerialNumber)
-                "firmwareVersion" -> resultString = getSysParam("FirmwareVersion")
-                "hardwareVersion" -> resultString = getSysParam("HardwareVersion")
-                "debugMode" -> resultString = getSysParam("DebugMode")
-                "reserved" -> resultString = getSysParam("Reserved")
-                "supportETC" -> resultString = getSysParam("SupportETC")
-            }
+        val arguments = call.arguments
+        if (arguments is String) {
+            resultString = getSysParam(arguments)
         }
         if (resultString == null) resultString = ""
         result.success(resultString)
@@ -96,18 +90,15 @@ class DeviceInfoEngine : FlutterPlugin {
     }
 
     private fun getSysParam(parameter: String): String ? {
-        return try {
+        try {
             val basicOpt = MainActivity.basicOptV2
             if (basicOpt != null) {
-                basicOpt.getSysParam(parameter)
-            } else {
-                Log.e(TAG, "basicOptV2 is null")
-                null
+                return basicOpt.getSysParam(parameter)
             }
         } catch (e: Throwable) {
             e.printStackTrace()
-            null
         }
+        return null
     }
 
     private fun setScreenMode(key: Int) {

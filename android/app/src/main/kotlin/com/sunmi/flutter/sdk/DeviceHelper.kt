@@ -1,6 +1,5 @@
-package com.sunmi.sunmi_flutter_sdk
+package com.sunmi.flutter.sdk
 
-import android.annotation.SuppressLint
 import android.os.Build
 
 object DeviceHelper {
@@ -9,18 +8,17 @@ object DeviceHelper {
         return Build.MODEL
     }
 
-    @SuppressLint("MissingPermission")
     fun getSerialNumber(): String {
-        return try {
+        try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                Build.getSerial()
+                return Build.getSerial()
             } else {
-                SystemPropertiesHelper.get("ro.serial" + "no")
+                return SystemPropertiesHelper.get("ro.serial" + "no")
             }
         } catch (e: Throwable) {
             e.printStackTrace()
-            ""
         }
+        return ""
     }
 
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_stateless_widget.dart';
-import 'package:sun_mi_flutter_sdk/pages/basic/GetSystemParameterPage.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/ScreenExclusivePage.dart';
+import 'package:sun_mi_flutter_sdk/pages/basic/basic_get_system_parameter_page.dart';
 import 'package:sun_mi_flutter_sdk/widget/WidgetHelper.dart';
 
 class BasicPage extends BaseStatelessWidget {
@@ -27,7 +27,7 @@ class BasicPage extends BaseStatelessWidget {
   }
 
   _gotoGetSystemParameterPage(context) {
-    builder(context) => const GetSystemParameterPage();
+    builder(context) => const BasicGetSystemParameterPage();
     var route = MaterialPageRoute(builder: builder);
     Navigator.of(context).push(route);
   }

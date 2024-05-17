@@ -1,6 +1,7 @@
 package com.sunmi.sunmi_flutter_sdk
 
 import android.content.Intent
+import com.sunmi.flutter.sdk.DeviceInfoRemoteEngine
 import com.sunmi.flutter.sdk.PrinterRemotePlugin
 import com.sunmi.flutter.sdk.ScannerRemoteEngine
 import com.sunmi.pay.hardware.aidlv2.system.BasicOptV2
@@ -21,12 +22,11 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        val deviceInfoEngine = DeviceInfoEngine()
         val printerRemotePlugin = PrinterRemotePlugin()
-        flutterEngine.plugins.add(deviceInfoEngine)
+        val deviceInfoRemoteEngine = DeviceInfoRemoteEngine()
         flutterEngine.plugins.add(scannerRemoteEngine)
         flutterEngine.plugins.add(printerRemotePlugin)
-
+        flutterEngine.plugins.add(deviceInfoRemoteEngine)
         GeneratedPluginRegistrant.registerWith(flutterEngine)
 
         bindSDKService()
@@ -43,7 +43,7 @@ class MainActivity : FlutterActivity() {
         }
 
         override fun onDisconnectPaySDK() {
-
+            basicOptV2 = null
         }
 
     }
