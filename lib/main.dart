@@ -6,9 +6,8 @@ import 'package:sun_mi_flutter_sdk/pages/home_page.dart';
 
 void main() {
   if (Platform.isAndroid) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent)
-    );
+    var style = const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(style);
   }
   var app = const MyApp();
   runApp(app);
@@ -20,11 +19,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: const HomePage()
-    );
+    var home = const HomePage();
+    var theme = ThemeData(primarySwatch: Colors.blue);
+    return MaterialApp(title: 'Flutter Demo', theme: theme, home: home);
   }
 
 }

@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var text = const Text('S U N M I Flutter SDK');
+    var text = const Text("SUN" + "MI Flutter SDK");
     var appBar = AppBar(title: text);
     var body = _mainView(context);
     var scaffold = Scaffold(appBar: appBar, body: body);
@@ -19,21 +19,36 @@ class HomePage extends StatelessWidget {
 
   _mainView(BuildContext context) {
     emptyAction() => {};
-    gtoPrintPageAction() => _gtoPrintPage(context);
+    gotoPrintPageAction() => _gtoPrintPage(context);
     gotoBasicPageAction() => _gotoBasicPage(context);
     gotoScannerPageAction() => _gotoScannerPage(context);
 
+    gotoEmvPageAction() => _gotoEmvPage(context);
+    gotoPinPadPageAction() => _gotoPinPadPage(context);
+    gtoReadCardPageAction() => _gotoReadCardPage(context);
+    gotoSecurityPageAction() => _gotoSecurityPage(context);
+
     List<Widget> children1st = [
-      _tabItem('Basic', ColorHelper.basic, gotoBasicPageAction),
-      _tabItem('Print', ColorHelper.print, gtoPrintPageAction),
+      _tabItem("Basic", ColorHelper.greenColor, gotoBasicPageAction),
+      _tabItem("ReadCard", ColorHelper.blueColor, gtoReadCardPageAction),
     ];
     List<Widget> children2nd = [
-      _tabItem('Scanner', ColorHelper.scan, gotoScannerPageAction),
-      _tabItem('Emv', ColorHelper.emv, emptyAction),
+      _tabItem("Security", ColorHelper.yellowColor, gotoSecurityPageAction),
+      _tabItem("PinPad", ColorHelper.greyColor, gotoPinPadPageAction),
+    ];
+    List<Widget> children3td = [
+      _tabItem("EMV", ColorHelper.orangeColor, gotoEmvPageAction),
+      _tabItem("Scanner", ColorHelper.greenColor, gotoScannerPageAction),
+    ];
+    List<Widget> children4th = [
+      _tabItem("Print", ColorHelper.blueColor, gotoPrintPageAction),
+      _tabItem("", Colors.white, emptyAction),
     ];
     var row1st = Row(children: children1st);
     var row2nd = Row(children: children2nd);
-    List<Widget> children = [row1st, row2nd];
+    var row3td = Row(children: children3td);
+    var row4th = Row(children: children4th);
+    List<Widget> children = [row1st, row2nd, row3td, row4th];
     var column = Column(children: children);
     var container = Container(padding: const EdgeInsets.all(8), child: column);
     return SingleChildScrollView(child: container);
@@ -57,11 +72,32 @@ class HomePage extends StatelessWidget {
     Navigator.of(context).push(route);
   }
 
+  _gotoEmvPage(context) {
+
+  }
+
+  _gotoPinPadPage(context) {
+
+  }
+
+  _gotoSecurityPage(context) {
+
+  }
+
+  _gotoReadCardPage(context) {
+
+  }
+
   _tabItem(String text, Color color, VoidCallback onPressed) {
     var borderRadius = BorderRadius.circular(8);
     var roundedRectangleBorder = RoundedRectangleBorder(borderRadius: borderRadius);
     var textStyle = const TextStyle(color: Colors.white, fontSize: 18);
-    var button = MaterialButton(color: color, onPressed: onPressed, child: Text(text, style: textStyle), shape: roundedRectangleBorder);
+    MaterialButton button;
+    if (text.isEmpty) {
+      button = MaterialButton(color: color, onPressed: onPressed, child: Text(text, style: textStyle), shape: roundedRectangleBorder, elevation: 0);
+    } else {
+      button = MaterialButton(color: color, onPressed: onPressed, child: Text(text, style: textStyle), shape: roundedRectangleBorder);
+    }
     var container = Container(height: 112, margin: const EdgeInsets.fromLTRB(4, 4, 4, 4), child: button);
     return Expanded(flex: 1, child: container);
   }

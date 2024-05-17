@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -26,7 +25,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   }
 
   onError(e) {
-    print(e);
+    debugPrint(e);
     var string = e.toString();
     showToast(string);
   }

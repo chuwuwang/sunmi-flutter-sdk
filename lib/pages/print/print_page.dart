@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sun_mi_flutter_sdk/engine/plugins/printer_engine.dart';
