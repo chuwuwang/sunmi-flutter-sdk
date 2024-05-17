@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sun_mi_flutter_sdk/pages/basic/BasicPage.dart';
+import 'package:sun_mi_flutter_sdk/pages/basic/basic_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/print/print_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/scanner/scanner_page.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = const TextStyle(color: Colors.white);
+    var style = const TextStyle(color: Colors.white, fontSize: 18);
     var text = Text("SUN" + "MI Flutter SDK", style: style);
     var appBar = AppBar(title: text, backgroundColor: Colors.blue);
     var body = _mainView(context);

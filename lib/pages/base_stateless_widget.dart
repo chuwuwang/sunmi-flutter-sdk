@@ -7,7 +7,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = const TextStyle(color: Colors.white);
+    var style = const TextStyle(color: Colors.white, fontSize: 18);
     var titleString = getTitleString();
     var text = Text(titleString, style: style);
     var iconThemeData = const IconThemeData(color: Colors.white);
