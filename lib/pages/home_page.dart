@@ -10,8 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var text = const Text("SUN" + "MI Flutter SDK");
-    var appBar = AppBar(title: text);
+    var style = const TextStyle(color: Colors.white);
+    var text = Text("SUN" + "MI Flutter SDK", style: style);
+    var appBar = AppBar(title: text, backgroundColor: Colors.blue);
     var body = _mainView(context);
     var scaffold = Scaffold(appBar: appBar, body: body);
     return MaterialApp(home: scaffold);

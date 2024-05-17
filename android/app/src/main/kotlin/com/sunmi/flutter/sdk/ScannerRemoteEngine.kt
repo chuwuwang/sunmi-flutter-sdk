@@ -8,7 +8,7 @@ import android.widget.Toast
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
 
-class ScannerEngine(private val activity: Activity) : FlutterPlugin {
+class ScannerRemoteEngine(private val activity: Activity) : FlutterPlugin {
 
     private lateinit var context: Context
 

@@ -8,4 +8,6 @@ class ColorHelper {
   static const Color orangeColor = Color(0XFFFF6600);
   static const Color yellowColor = Color(0XFFFFCC00);
 
+  static const Color themeColor = Color(0XFFFF6600);
+
 }
