@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var home = const HomePage();
-    var theme = ThemeData(primarySwatch: Colors.blue);
+    var colorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.blue, backgroundColor: Colors.white);
+    var theme = ThemeData(primarySwatch: Colors.blue, colorScheme: colorScheme);
     return MaterialApp(title: "Flutter Demo", theme: theme, home: home);
   }
 
