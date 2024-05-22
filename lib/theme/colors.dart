@@ -10,6 +10,7 @@ class ColorHelper {
 
   static const Color themeColor = Color(0XFFFF6600);
 
+  static const Color textMainColor = Color(0XFF333333);
   static const Color textContentColor = Color(0XFF666666);
   static const Color defaultLineColor = Color(0XFFD7D7D7);
 

@@ -14,20 +14,20 @@ class BasicGetSystemParameterPage extends BaseStatelessWidget {
   String getTitleString() => "Get System Parameters";
 
   @override
-  Widget onCreateChild(BuildContext context) => const DeviceInfoWidget();
+  Widget onCreateChild(BuildContext context) => const _DeviceInfoWidget();
 
 }
 
-class DeviceInfoWidget extends BaseStatefulWidget {
+class _DeviceInfoWidget extends BaseStatefulWidget {
 
-  const DeviceInfoWidget( { Key ? key } ) : super(key: key);
+  const _DeviceInfoWidget( { Key ? key } ) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => DeviceInfoState();
+  State<StatefulWidget> createState() => _DeviceInfoState();
 
 }
 
-class DeviceInfoState extends BaseState<DeviceInfoWidget> {
+class _DeviceInfoState extends BaseState<_DeviceInfoWidget> {
 
   final _resultBuffer = StringBuffer();
 
