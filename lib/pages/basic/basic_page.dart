@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_stateless_widget.dart';
-import 'package:sun_mi_flutter_sdk/pages/basic/ScreenExclusivePage.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_buzzer_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_get_system_parameter_page.dart';
-import 'package:sun_mi_flutter_sdk/widget/WidgetHelper.dart';
+import 'package:sun_mi_flutter_sdk/pages/basic/basic_screen_exclusive_page.dart';
+import 'package:sun_mi_flutter_sdk/widget/common_ui.dart';
 
 class BasicPage extends BaseStatelessWidget {
 
@@ -20,10 +20,10 @@ class BasicPage extends BaseStatelessWidget {
     gotoGetSystemParameterPageAction() => _gotoGetSystemParameterPage(context);
 
     List<Widget> children = [
-      WidgetHelper.commonItem("Buzzer", true, gotoBuzzerPageAction),
-      WidgetHelper.commonItem("LED lamp control", true, emptyAction),
-      WidgetHelper.commonItem("Set screen exclusive", true, gotoScreenExclusivePageAction),
-      WidgetHelper.commonItem("Get system parameters", true, gotoGetSystemParameterPageAction),
+      CommonUiUtil.commonItem("Get system parameters", true, gotoGetSystemParameterPageAction),
+      CommonUiUtil.commonItem("Buzzer", true, gotoBuzzerPageAction),
+      CommonUiUtil.commonItem("LED lamp control", true, emptyAction),
+      CommonUiUtil.commonItem("Set screen exclusive", true, gotoScreenExclusivePageAction),
     ];
     return Column(children: children);
   }
@@ -41,7 +41,7 @@ class BasicPage extends BaseStatelessWidget {
   }
 
   _gotoScreenExclusivePage(context) {
-    builder(context) => const ScreenExclusivePage();
+    builder(context) => const BasicScreenExclusivePage();
     var route = MaterialPageRoute(builder: builder);
     Navigator.of(context).push(route);
   }
