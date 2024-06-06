@@ -4,10 +4,6 @@ class DeviceInfoEngine {
 
   static const MethodChannel _channel = MethodChannel("device-info-engine");
 
-  static const int navigationBarItemKeyBack = 4194304;
-  static const int navigationBarItemKeyHome = 2097152;
-  static const int navigationBarItemKeyRecent = 16777216;
-
   static Future<String> getSystemParameters(String parameter) async {
     return await _channel.invokeMethod("getSystemParameters", parameter);
   }

@@ -24,20 +24,23 @@ class DeviceInfoRemoteEngine : FlutterPlugin {
             getSystemParameters(call, result)
         } else if (method == "buzzer") {
             buzzer(call)
+        } else if (method == "enableScreenMonopoly") {
+            enableScreenMonopoly()
+        } else if (method == "disableScreenMonopoly") {
+            disableScreenMonopoly()
+        } else if (method == "enableStatusBarDropDown") {
+            enableStatusBarDropDown()
+        } else if (method == "disableStatusBarDropDown") {
+            disableStatusBarDropDown()
+        } else if (method == "showNavigationBar") {
+            showNavigationBar()
+        } else if (method == "hideNavigationBar") {
+            hideNavigationBar()
+        } else if (method == "hideNavigationBarItemKey") {
+            hideNavigationBarItemKey(call)
         } else {
             result.notImplemented()
         }
-//        when (call.method) {
-//            "getSystemParameters" -> getSystemParameters(call, result)
-//            "enableScreenMonopoly" -> enableScreenMonopoly()
-//            "disableScreenMonopoly" -> disableScreenMonopoly()
-//            "enableStatusBarDropDown" -> enableStatusBarDropDown()
-//            "disableStatusBarDropDown" -> disableStatusBarDropDown()
-//            "hideNavigationBar" -> hideNavigationBar()
-//            "showNavigationBar" -> showNavigationBar()
-//            "hideNavigationBarItemKey" -> hideNavigationBarItemKey(call)
-//            else -> result.notImplemented()
-//        }
     }
 
     private fun getSystemParameters(call: MethodCall, result: MethodChannel.Result) {

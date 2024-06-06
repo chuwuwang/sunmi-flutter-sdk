@@ -63,4 +63,8 @@ class DeviceInfoConstant {
   static const String DEBUG_MODE = "DebugMode";
   static const String EMV_MASK = "EmvMask";
 
+  static const int navigationBarItemKeyBack = 4194304;
+  static const int navigationBarItemKeyHome = 2097152;
+  static const int navigationBarItemKeyRecent = 16777216;
+
 }
