@@ -1,6 +1,8 @@
 package com.sunmi.sunmi_flutter_sdk
 
 import android.content.Intent
+import android.util.Log
+import com.sunmi.flutter.sdk.Constant
 import com.sunmi.flutter.sdk.DeviceInfoRemoteEngine
 import com.sunmi.flutter.sdk.PrinterRemotePlugin
 import com.sunmi.flutter.sdk.ScannerRemoteEngine
@@ -39,10 +41,12 @@ class MainActivity : FlutterActivity() {
     private val connectCallback = object : SunmiPayKernel.ConnectCallback {
 
         override fun onConnectPaySDK() {
+            Log.e(Constant.TAG, "onConnectPaySDK")
             basicOptV2 = SunmiPayKernel.getInstance().mBasicOptV2
         }
 
         override fun onDisconnectPaySDK() {
+            Log.e(Constant.TAG, "onDisconnectPaySDK")
             basicOptV2 = null
         }
 
