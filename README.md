@@ -5,7 +5,12 @@ SUNMI flutter sdk is a set of interface which is based on firmware encapsulation
 
 ![](https://github.com/chuwuwang/sunmi-flutter-sdk/blob/main/screenshot/screenshot_1.jpg)![](https://github.com/chuwuwang/sunmi-flutter-sdk/blob/main/screenshot/screenshot_2.jpg)![](https://github.com/chuwuwang/sunmi-flutter-sdk/blob/main/screenshot/screenshot_3.jpg)
 
-## Remark
+### API
+- [Device Module API](https://github.com/chuwuwang/sunmi-flutter-sdk/wiki/Device-Module-API)
+- [Printer Module API](https://github.com/chuwuwang/sunmi-flutter-sdk/wiki/Printer-Module-API)
+- [Scanner Module API](https://github.com/chuwuwang/sunmi-flutter-sdk/wiki/Scanner-Module-API)
+
+### Remark
 This Demo is only suitable for SUNMI P series and V series products, not suitable for other products. If you have other requirements, please contact me.
 
 Email: chuwuwang@126.com
