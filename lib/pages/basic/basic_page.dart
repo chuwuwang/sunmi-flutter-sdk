@@ -3,6 +3,7 @@ import 'package:sun_mi_flutter_sdk/pages/base_stateless_widget.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_buzzer_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_get_system_parameter_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_screen_exclusive_page.dart';
+import 'package:sun_mi_flutter_sdk/utils/navigator_util.dart';
 import 'package:sun_mi_flutter_sdk/widget/common_ui.dart';
 
 class BasicPage extends BaseStatelessWidget {
@@ -30,20 +31,17 @@ class BasicPage extends BaseStatelessWidget {
 
   _gotoBuzzerPage(context) {
     builder(context) => const BasicBuzzerPage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
   _gotoGetSystemParameterPage(context) {
     builder(context) => const BasicGetSystemParameterPage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
   _gotoScreenExclusivePage(context) {
     builder(context) => const BasicScreenExclusivePage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
 }

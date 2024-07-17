@@ -27,8 +27,8 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   }
 
   onError(e) {
-    debugPrint(e);
     var string = e.toString();
+    debugPrint(string);
     showToast(string);
   }
 

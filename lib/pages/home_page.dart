@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sun_mi_flutter_sdk/pages/basic/basic_page.dart';
+import 'package:sun_mi_flutter_sdk/pages/card/card_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/print/print_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/scanner/scanner_page.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
+import 'package:sun_mi_flutter_sdk/utils/navigator_util.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -86,7 +88,8 @@ class HomePage extends StatelessWidget {
   }
 
   _gotoReadCardPage(context) {
-
+    builder(context) => const ReadCardPage();
+    NavigatorUtil.navigation(context, builder);
   }
 
   _tabItem(String text, Color color, VoidCallback onPressed) {
