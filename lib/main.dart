@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/printer_engine.dart';
 import 'package:sun_mi_flutter_sdk/pages/home_page.dart';
 
 void main() {
@@ -11,6 +12,7 @@ void main() {
   }
   var app = const MyApp();
   runApp(app);
+  PrinterEngine.initPrinter();
 }
 
 class MyApp extends StatelessWidget {

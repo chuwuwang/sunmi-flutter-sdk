@@ -13,8 +13,6 @@ class PrintPage extends BaseStatelessWidget {
 
   @override
   onCreateChild(BuildContext context) {
-    PrinterEngine.initPrinter();
-
     printRowAction() => _printRow();
     printTextAction() => _printText();
     printImageAction() => _printImage();

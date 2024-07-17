@@ -18,4 +18,11 @@ class CommonUiUtil {
     return MaterialButton(padding: EdgeInsets.zero, onPressed: onPressed, child: stack,);
   }
 
+  static backgroundWhiteRadius(double rd) {
+    var radius = Radius.circular(rd);
+    var borderRadius = BorderRadius.all(radius);
+    var border = Border.all(color: ColorHelper.defaultLineColor, width: 1);
+    return BoxDecoration(border: border, color: Colors.white, borderRadius: borderRadius);
+  }
+
 }
