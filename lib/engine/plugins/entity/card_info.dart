@@ -6,10 +6,14 @@ class CardInfo {
   String serviceCode = "";
   String cardholderName = "";
   String cardSerialNumber = "";
+  String atr = "";
+  String ats = "";
   String track1 = "";
   String track2 = "";
   String track3 = "";
   bool fallback = false;
+
+  CardInfo();
 
   CardInfo.fromJson(Map<String, dynamic> json) {
     cardType = json["cardType"] ?? -1;
@@ -22,6 +26,8 @@ class CardInfo {
     track2 = json["track2"] ?? "";
     track3 = json["track3"] ?? "";
     fallback = json["fallback"] ?? false;
+    atr = json["atr"] ?? "";
+    ats = json["ats"] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -36,6 +42,8 @@ class CardInfo {
     map["track2"] = track2;
     map["track3"] = track3;
     map["fallback"] = fallback;
+    map["ats"] = ats;
+    map["ats"] = ats;
     return map;
   }
 
