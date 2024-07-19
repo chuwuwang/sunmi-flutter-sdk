@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = const TextStyle(color: Colors.white, fontSize: 18);
+    var style = const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
     var text = Text("SUN" + "MI Flutter SDK", style: style);
     var appBar = AppBar(title: text, backgroundColor: Colors.blue);
     var body = _mainView(context);
@@ -59,20 +59,17 @@ class HomePage extends StatelessWidget {
 
   _gotoBasicPage(context) {
     builder(context) => const BasicPage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
   _gtoPrintPage(context) {
     builder(context) => const PrintPage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
   _gotoScannerPage(context) {
     builder(context) => const ScannerPage();
-    var route = MaterialPageRoute(builder: builder);
-    Navigator.of(context).push(route);
+    NavigatorUtil.navigation(context, builder);
   }
 
   _gotoEmvPage(context) {

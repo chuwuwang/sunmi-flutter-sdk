@@ -21,10 +21,10 @@ class BasicPage extends BaseStatelessWidget {
     gotoGetSystemParameterPageAction() => _gotoGetSystemParameterPage(context);
 
     List<Widget> children = [
-      CommonUiUtil.commonItem("Get system parameters", true, gotoGetSystemParameterPageAction),
+      CommonUiUtil.commonItem("Get System Parameters", true, gotoGetSystemParameterPageAction),
       CommonUiUtil.commonItem("Buzzer", true, gotoBuzzerPageAction),
-      CommonUiUtil.commonItem("LED lamp control", true, emptyAction),
-      CommonUiUtil.commonItem("Set screen exclusive", true, gotoScreenExclusivePageAction),
+      CommonUiUtil.commonItem("LED Lamp Control", true, emptyAction),
+      CommonUiUtil.commonItem("Set Screen Exclusive", true, gotoScreenExclusivePageAction),
     ];
     return Column(children: children);
   }

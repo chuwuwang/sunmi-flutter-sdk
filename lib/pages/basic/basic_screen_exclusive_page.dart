@@ -9,7 +9,7 @@ class BasicScreenExclusivePage extends BaseStatelessWidget {
   const BasicScreenExclusivePage( { Key ? key } ) : super(key: key);
 
   @override
-  String getTitleString() => "Set screen exclusive";
+  String getTitleString() => "Set Screen Exclusive";
 
   @override
   Widget onCreateChild(BuildContext context) {

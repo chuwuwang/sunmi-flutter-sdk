@@ -21,12 +21,12 @@ class PrintPage extends BaseStatelessWidget {
     printBarcodeAndQRCodeAction() => _printBarcodeAndQRCode();
 
     List<Widget> children = [
-      CommonUiUtil.commonItem("Get printer status", true, getPrinterStatusAction),
-      CommonUiUtil.commonItem("Print text", true, printTextAction),
-      CommonUiUtil.commonItem("Print image", true, printImageAction),
-      CommonUiUtil.commonItem("Print row", true, printRowAction),
-      CommonUiUtil.commonItem("Print barcode and qrcode", true, printBarcodeAndQRCodeAction),
-      CommonUiUtil.commonItem("Print buffer", true, printBufferAction),
+      CommonUiUtil.commonItem("Get Printer Status", true, getPrinterStatusAction),
+      CommonUiUtil.commonItem("Print Text", true, printTextAction),
+      CommonUiUtil.commonItem("Print Image", true, printImageAction),
+      CommonUiUtil.commonItem("Print Row", true, printRowAction),
+      CommonUiUtil.commonItem("Print Barcode and QRCode", true, printBarcodeAndQRCodeAction),
+      CommonUiUtil.commonItem("Print Buffer", true, printBufferAction),
     ];
     return Column(children: children);
   }
