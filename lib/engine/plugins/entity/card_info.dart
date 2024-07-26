@@ -8,6 +8,7 @@ class CardInfo {
   String cardSerialNumber = "";
   String atr = "";
   String ats = "";
+  String uuid = "";
   String track1 = "";
   String track2 = "";
   String track3 = "";
