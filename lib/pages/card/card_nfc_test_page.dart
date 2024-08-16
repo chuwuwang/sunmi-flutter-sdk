@@ -55,7 +55,7 @@ class _NFCCardState extends BaseState<_NFCCardWidget> {
   @override
   Widget build(BuildContext context) {
     var info = CardInfo();
-    if (_cardInfo != null) info = _cardInfo!;
+    if (_cardInfo != null) info = _cardInfo ! ;
     var ats = StringUtil.null2String(info.ats);
     var uuid = StringUtil.null2String(info.uuid);
 
@@ -92,7 +92,7 @@ class _NFCCardState extends BaseState<_NFCCardWidget> {
       _cardInfo = CardInfo.fromJson(obj);
     }
     setState(callback);
-    _delayedCheckCard();
+    Future.delayed(const Duration(milliseconds: 500), _startCheckCard);
   }
 
   void _onCheckCardFailure(throwable) {
@@ -103,12 +103,7 @@ class _NFCCardState extends BaseState<_NFCCardWidget> {
       _description = "Check card error";
     }
     setState(callback);
-    _delayedCheckCard();
-  }
-
-  void _delayedCheckCard() {
-    var duration = const Duration(milliseconds: 500);
-    Future.delayed(duration, _startCheckCard);
+    Future.delayed(const Duration(milliseconds: 500), _startCheckCard);
   }
 
 }

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/check_card_processor_engine.dart';
 import 'package:sun_mi_flutter_sdk/engine/plugins/entity/card_info.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_state.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_stateful_widget.dart';
@@ -35,9 +38,21 @@ class _MagneticCardState extends BaseState<_MagneticCardWidget> {
   CardInfo ? _cardInfo;
 
   @override
+  void initState() {
+    super.initState();
+    _startCheckCard();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    CheckCardProcessorEngine.stopCheckCard();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var info = CardInfo();
-    if (_cardInfo != null) info = _cardInfo!;
+    if (_cardInfo != null) info = _cardInfo ! ;
     var track1 = StringUtil.null2String(info.track1);
     var track2 = StringUtil.null2String(info.track2);
     var track3 = StringUtil.null2String(info.track3);
@@ -69,6 +84,32 @@ class _MagneticCardState extends BaseState<_MagneticCardWidget> {
     var column = Column(children: children, crossAxisAlignment: CrossAxisAlignment.start);
     var container = Container(padding: const EdgeInsets.only(left: 16, right: 16), child: column);
     return container;
+  }
+
+  void _startCheckCard() {
+    var future = CheckCardProcessorEngine.startCheckCard(1, 60);
+    future.then(_onCheckCardSuccess).catchError(_onCheckCardFailure);
+  }
+
+  void _onCheckCardSuccess(value) {
+    _totalTime++;
+    _successTime++;
+    callback() {
+      var obj = jsonDecode(value);
+      _cardInfo = CardInfo.fromJson(obj);
+    }
+    setState(callback);
+    Future.delayed(const Duration(milliseconds: 500), _startCheckCard);
+  }
+
+  void _onCheckCardFailure(throwable) {
+    _totalTime++;
+    _failedTime++;
+    callback() {
+      _cardInfo = null;
+    }
+    setState(callback);
+    Future.delayed(const Duration(milliseconds: 500), _startCheckCard);
   }
 
 }

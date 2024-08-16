@@ -5,6 +5,7 @@ import 'package:sun_mi_flutter_sdk/pages/print/print_page.dart';
 import 'package:sun_mi_flutter_sdk/pages/scanner/scanner_page.dart';
 import 'package:sun_mi_flutter_sdk/theme/colors.dart';
 import 'package:sun_mi_flutter_sdk/utils/navigator_util.dart';
+import 'package:sun_mi_flutter_sdk/utils/toast_util.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -73,15 +74,15 @@ class HomePage extends StatelessWidget {
   }
 
   _gotoEmvPage(context) {
-
+    ToastUtil.showToast("developing");
   }
 
   _gotoPinPadPage(context) {
-
+    ToastUtil.showToast("developing");
   }
 
   _gotoSecurityPage(context) {
-
+    ToastUtil.showToast("developing");
   }
 
   _gotoReadCardPage(context) {

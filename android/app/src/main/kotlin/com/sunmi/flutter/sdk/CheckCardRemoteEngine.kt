@@ -47,7 +47,7 @@ class CheckCardRemoteEngine : FlutterPlugin {
         val timeout = methodCall.argument<Int>("timeout") ?: 60
         val cardProcessImpl = checkCardProcess
         if (cardProcessImpl != null) {
-            cardProcessImpl.startCheckCard(cardType, timeout)
+            cardProcessImpl.startCheckCard(cardType, timeout, true)
         }
     }
 

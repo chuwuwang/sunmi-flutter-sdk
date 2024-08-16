@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sun_mi_flutter_sdk/utils/toast_util.dart';
 
 abstract class BaseStatelessWidget extends StatelessWidget {
 
@@ -23,7 +23,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   }
 
   showToast(String message) {
-    Fluttertoast.showToast(msg: message);
+    ToastUtil.showToast(message);
   }
 
   onError(e) {

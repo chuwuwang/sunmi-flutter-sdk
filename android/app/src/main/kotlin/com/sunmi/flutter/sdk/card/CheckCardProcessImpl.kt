@@ -20,7 +20,7 @@ class CheckCardProcessImpl(private val readCardOpt: ReadCardOptV2) {
 
     }
 
-    fun startCheckCard(cardType: Int, timeout: Int = 60) {
+    fun startCheckCard(cardType: Int, timeout: Int = 60, allowedFallback: Boolean) {
         try {
             this.allowedFallback = allowedFallback
             readCardOpt.checkCard(cardType, checkCardCallback, timeout)
