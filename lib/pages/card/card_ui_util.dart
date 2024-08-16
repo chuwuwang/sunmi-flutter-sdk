@@ -17,4 +17,10 @@ class CardUiUtil {
     return Expanded(child: container);
   }
 
+  static Widget descriptionText(String data) {
+    var style = const TextStyle(color: ColorHelper.textMainColor, fontSize: 16, fontWeight: FontWeight.bold);
+    var text = Text(data, style: style);
+    return Center(child: text);
+  }
+
 }

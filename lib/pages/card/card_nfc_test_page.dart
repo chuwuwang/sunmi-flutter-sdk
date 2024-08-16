@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sun_mi_flutter_sdk/engine/plugins/check_card_processor_engine.dart';
 import 'package:sun_mi_flutter_sdk/engine/plugins/entity/card_info.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_state.dart';
 import 'package:sun_mi_flutter_sdk/pages/base_stateful_widget.dart';
@@ -35,6 +38,19 @@ class _NFCCardState extends BaseState<_NFCCardWidget> {
   int _failedTime = 0;
   int _successTime = 0;
   CardInfo ? _cardInfo;
+  String _description = "NFC Card Test";
+
+  @override
+  void initState() {
+    super.initState();
+    _startCheckCard();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    CheckCardProcessorEngine.stopCheckCard();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +68,47 @@ class _NFCCardState extends BaseState<_NFCCardWidget> {
     List<Widget> children = [
       const SizedBox(height: 24), image,
       const SizedBox(height: 16), Row(children: childs),
-      const SizedBox(height: 16), CardUiUtil.itemText("UUID: $uuid"),
+      const SizedBox(height: 16), CardUiUtil.descriptionText(_description),
+      const SizedBox(height: 8), CardUiUtil.itemText("UUID: $uuid"),
       const SizedBox(height: 8), CardUiUtil.itemText("ATS: $ats"),
       const SizedBox(height: 24),
     ];
     var column = Column(children: children, crossAxisAlignment: CrossAxisAlignment.start);
     var container = Container(padding: const EdgeInsets.only(left: 16, right: 16), child: column);
     return container;
+  }
+
+  void _startCheckCard() {
+    var future = CheckCardProcessorEngine.startCheckCard(4, 60);
+    future.then(_onCheckCardSuccess).catchError(_onCheckCardFailure);
+  }
+
+  void _onCheckCardSuccess(value) {
+    _totalTime++;
+    _successTime++;
+    callback() {
+      var obj = jsonDecode(value);
+      _description = "Find RF card";
+      _cardInfo = CardInfo.fromJson(obj);
+    }
+    setState(callback);
+    _delayedCheckCard();
+  }
+
+  void _onCheckCardFailure(throwable) {
+    _totalTime++;
+    _failedTime++;
+    callback() {
+      _cardInfo = null;
+      _description = "Check card error";
+    }
+    setState(callback);
+    _delayedCheckCard();
+  }
+
+  void _delayedCheckCard() {
+    var duration = const Duration(milliseconds: 500);
+    Future.delayed(duration, _startCheckCard);
   }
 
 }

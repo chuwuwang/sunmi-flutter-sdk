@@ -20,15 +20,46 @@ class CheckCardRemoteEngine : FlutterPlugin {
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
-        val methodChannel = MethodChannel(binding.binaryMessenger, "check-card-engine")
+        val methodChannel = MethodChannel(binding.binaryMessenger, "check-card-processor-engine")
         methodChannel.setMethodCallHandler(methodCallHandler)
-        initReceiver()
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         methodResult = null
         checkCardProcess = null
     }
+
+    private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
+        val method = call.method
+        if (method == "startCheckCard") {
+            initReceiver()
+            methodResult = result
+            startCheckCard(call)
+        } else if (method == "stopCheckCard") {
+            stopCheckCard()
+        } else {
+            result.notImplemented()
+        }
+    }
+
+    private fun startCheckCard(methodCall: MethodCall) {
+        val cardType = methodCall.argument<Int>("cardType") ?: (1 or 2 or 4)
+        val timeout = methodCall.argument<Int>("timeout") ?: 60
+        val cardProcessImpl = checkCardProcess
+        if (cardProcessImpl != null) {
+            cardProcessImpl.startCheckCard(cardType, timeout)
+        }
+    }
+
+    private fun stopCheckCard() {
+        val cardProcessImpl = checkCardProcess
+        if (cardProcessImpl != null) {
+            cardProcessImpl.cancelCheckCard()
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun initReceiver() {
         val readCardOpt = MainActivity.readCardOpt
@@ -70,34 +101,6 @@ class CheckCardRemoteEngine : FlutterPlugin {
         } catch (e: Throwable) {
             e.printStackTrace()
             onError(e.localizedMessage ?: "")
-        }
-    }
-
-    private val methodCallHandler = MethodChannel.MethodCallHandler { call, result ->
-        val method = call.method
-        if (method == "startCheckCard") {
-            methodResult = result
-            startCheckCard(call)
-        } else if (method == "stopCheckCard") {
-            stopCheckCard()
-        } else {
-            result.notImplemented()
-        }
-    }
-
-    private fun startCheckCard(methodCall: MethodCall) {
-        val cardType = methodCall.argument<Int>("cardType") ?: (1 or 2 or 4)
-        val timeout = methodCall.argument<Int>("timeout") ?: 60
-        val cardProcessImpl = checkCardProcess
-        if (cardProcessImpl != null) {
-            cardProcessImpl.startCheckCard(cardType, timeout)
-        }
-    }
-
-    private fun stopCheckCard() {
-        val cardProcessImpl = checkCardProcess
-        if (cardProcessImpl != null) {
-            cardProcessImpl.cancelCheckCard()
         }
     }
 

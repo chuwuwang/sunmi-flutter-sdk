@@ -78,6 +78,7 @@ class CheckCardProcessImpl(private val readCardOpt: ReadCardOptV2) {
                 cardInfo.ats = ats
                 cardInfo.uuid = uuid
                 cardInfo.cardType = CardType.Contactless.text
+                onCheckCardSuccess(cardInfo)
             } else {
                 onCheckCardFailure(Constant.ERROR_READ_CARD_FAILURE, "Read card failure")
             }
@@ -90,6 +91,7 @@ class CheckCardProcessImpl(private val readCardOpt: ReadCardOptV2) {
                 val cardInfo = CardInfo()
                 cardInfo.atr = atr
                 cardInfo.cardType = CardType.Contact.text
+                onCheckCardSuccess(cardInfo)
             } else {
                 onCheckCardFailure(Constant.ERROR_READ_CARD_FAILURE, "Read card failure")
             }
